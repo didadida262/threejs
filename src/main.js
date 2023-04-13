@@ -10,7 +10,7 @@ const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
 const scene = new THREE.Scene()
 
-const geometry = new THREE.BoxGeometry(60, 60, 60)
+const geometry = new THREE.BoxGeometry(10, 10, 10)
 const material = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
 material.metalness = 0.7
@@ -65,6 +65,10 @@ const orbit = new OrbitControls(camera, renderer.domElement)
 orbit.enableDamping = true
 
 const clock = new THREE.Clock()
+
+// grid
+const gridHelper = new THREE.GridHelper(50,50)
+scene.add(gridHelper)
 
 // 设置动画
 // gsap.to(mesh.position, { duration: 2.5, ease: "power1.inOut", y: -200})
