@@ -1,5 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
+// dracoLoader.setDecoderPath("/three/examples/jsm/loaders/draco/gltf/")
+
 import gsap from 'gsap'
 
 console.log('THREE>>',THREE)
@@ -69,6 +73,20 @@ const clock = new THREE.Clock()
 // grid
 const gridHelper = new THREE.GridHelper(50,50)
 scene.add(gridHelper)
+
+// 导入模型
+const loader = new GLTFLoader()
+const dracoLoader = new DRACOLoader()
+// three/examples/js/libs/draco/gltf
+dracoLoader.setDecoderPath("./draco/")
+console.log('dracoLoader>>',dracoLoader)
+loader.setDRACOLoader(dracoLoader)
+loader.load('./air.glb', (gltf) => {
+  console.log('success!!!')
+  const air = gltf.scene
+  scene.add(air)
+})
+
 
 // 设置动画
 // gsap.to(mesh.position, { duration: 2.5, ease: "power1.inOut", y: -200})
