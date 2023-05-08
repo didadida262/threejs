@@ -8,8 +8,6 @@ import gsap from 'gsap'
 
 console.log('THREE>>',THREE)
 
-//  
-
 const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
 const scene = new THREE.Scene()
@@ -17,9 +15,11 @@ const scene = new THREE.Scene()
 const geometry = new THREE.BoxGeometry(10, 10, 10)
 const material = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
+// material.metalness = 1
+// material.roughness = 1
 material.metalness = 0.7
 material.roughness = 0.2
-material.color = new THREE.Color('red')
+material.color = new THREE.Color('green')
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 // this.moveGeo()
@@ -57,6 +57,7 @@ scene.add(axesHelper)
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
+renderer.setClearColor('gray',0.5)
 
 
 // const container = document.getElementById('#app')
@@ -77,11 +78,11 @@ scene.add(gridHelper)
 // 导入模型
 const loader = new GLTFLoader()
 const dracoLoader = new DRACOLoader()
-// three/examples/js/libs/draco/gltf
+dracoLoader.preload()
 dracoLoader.setDecoderPath("./draco/")
-console.log('dracoLoader>>',dracoLoader)
 loader.setDRACOLoader(dracoLoader)
-loader.load('./air.glb', (gltf) => {
+// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+  loader.load("air.glb", function(gltf) {
   console.log('success!!!')
   const air = gltf.scene
   scene.add(air)
