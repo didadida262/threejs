@@ -3,10 +3,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
 // dracoLoader.setDecoderPath("/three/examples/jsm/loaders/draco/gltf/")
-
+// 动画库
 import gsap from 'gsap'
+// 用户界面
+import * as dat from 'dat.gui'
 
 console.log('THREE>>',THREE)
+const gui = new dat.GUI()
 
 //  
 
@@ -21,6 +24,17 @@ material.metalness = 0.7
 material.roughness = 0.2
 material.color = new THREE.Color('red')
 const mesh = new THREE.Mesh(geometry, material)
+gui.add(mesh.position, "x")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动x')
+  .onChange((val) => {
+    console.log('x修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
 scene.add(mesh)
 // this.moveGeo()
 
