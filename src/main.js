@@ -12,7 +12,7 @@ const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
 const scene = new THREE.Scene()
 
-const geometry = new THREE.BoxGeometry(10, 10, 10)
+const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
 // material.metalness = 1
@@ -20,6 +20,7 @@ const material = new THREE.MeshStandardMaterial()
 material.metalness = 0.7
 material.roughness = 0.2
 material.color = new THREE.Color('green')
+// mesh
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 // this.moveGeo()
@@ -27,7 +28,7 @@ scene.add(mesh)
 
 // this.setPoint()
 const point = new THREE.PointLight(0xffffff, 2)
-point.position.set(2, 200, 300)
+point.position.set(0, 50, 50)
 scene.add(point)
 // 测试点
 // const point2 = new THREE.PointLight(0xffffff, 2)
@@ -43,7 +44,7 @@ scene.add(point)
 
 // this.setCamera()
 const k = containerWidth / containerHeight // 窗口宽高比
-const s = 200 // 三维场景显示范围控制系数，系数越大，显示的范围越大
+const s = 5 // 三维场景显示范围控制系数，系数越大，显示的范围越大
 const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
 camera.position.set(200, 300, 200) // 设置相机位置
 camera.lookAt(scene.position) // 设置相机方向(指向的场景对象)
@@ -116,7 +117,7 @@ loader.setDRACOLoader(dracoLoader)
   const ani1 = gsap.to(mesh.position, {
    duration: 1, 
    ease: "power1.inOut",
-   x: 400,
+   x: 10,
    repeat: -1,
    yoyo: true,
   //  delay: 2
