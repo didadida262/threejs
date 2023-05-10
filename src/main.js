@@ -20,8 +20,8 @@ const scene = new THREE.Scene()
 
 for (let i = 0; i < 50; i++) {
   const geometry = new THREE.BufferGeometry()
-  const positionArray = new Float32Array(9)
-  for (let j = 0; j < 9; j++) {
+  const positionArray = new Float32Array(27)
+  for (let j = 0; j < 27; j++) {
     positionArray[j] = Math.random() * 10 - 5
   }
   geometry.setAttribute("position", new THREE.BufferAttribute(positionArray, 3))
@@ -81,7 +81,7 @@ const clock = new THREE.Clock()
 
 // grid
 const gridHelper = new THREE.GridHelper(50,50)
-scene.add(gridHelper)
+// scene.add(gridHelper)
 
 // 导入模型 //fail
 // const loader = new GLTFLoader()
