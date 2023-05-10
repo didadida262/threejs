@@ -11,18 +11,19 @@ import * as dat from 'dat.gui'
 console.log('THREE>>',THREE)
 const gui = new dat.GUI()
 
-//  
-
 const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
 const scene = new THREE.Scene()
 
-const geometry = new THREE.BoxGeometry(10, 10, 10)
+const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
+// material.metalness = 1
+// material.roughness = 1
 material.metalness = 0.7
 material.roughness = 0.2
-material.color = new THREE.Color('red')
+material.color = new THREE.Color('green')
+// mesh
 const mesh = new THREE.Mesh(geometry, material)
 gui.add(mesh.position, "x")
   .min(0)
@@ -41,7 +42,7 @@ scene.add(mesh)
 
 // this.setPoint()
 const point = new THREE.PointLight(0xffffff, 2)
-point.position.set(2, 200, 300)
+point.position.set(0, 50, 50)
 scene.add(point)
 // 测试点
 // const point2 = new THREE.PointLight(0xffffff, 2)
@@ -57,7 +58,7 @@ scene.add(point)
 
 // this.setCamera()
 const k = containerWidth / containerHeight // 窗口宽高比
-const s = 200 // 三维场景显示范围控制系数，系数越大，显示的范围越大
+const s = 5 // 三维场景显示范围控制系数，系数越大，显示的范围越大
 const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
 camera.position.set(200, 300, 200) // 设置相机位置
 camera.lookAt(scene.position) // 设置相机方向(指向的场景对象)
@@ -71,6 +72,7 @@ scene.add(axesHelper)
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
+renderer.setClearColor('gray',0.5)
 
 
 // const container = document.getElementById('#app')
@@ -91,11 +93,11 @@ scene.add(gridHelper)
 // 导入模型
 const loader = new GLTFLoader()
 const dracoLoader = new DRACOLoader()
-// three/examples/js/libs/draco/gltf
+dracoLoader.preload()
 dracoLoader.setDecoderPath("./draco/")
-console.log('dracoLoader>>',dracoLoader)
 loader.setDRACOLoader(dracoLoader)
-loader.load('./air.glb', (gltf) => {
+// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+  loader.load("air.glb", function(gltf) {
   console.log('success!!!')
   const air = gltf.scene
   scene.add(air)
@@ -129,7 +131,7 @@ loader.load('./air.glb', (gltf) => {
   const ani1 = gsap.to(mesh.position, {
    duration: 1, 
    ease: "power1.inOut",
-   x: 400,
+   x: 10,
    repeat: -1,
    yoyo: true,
   //  delay: 2
