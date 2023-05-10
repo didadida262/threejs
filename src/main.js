@@ -25,6 +25,8 @@ material.roughness = 0.2
 material.color = new THREE.Color('green')
 // mesh
 const mesh = new THREE.Mesh(geometry, material)
+
+// datGUI
 gui.add(mesh.position, "x")
   .min(0)
   .max(10)
@@ -36,6 +38,47 @@ gui.add(mesh.position, "x")
   .onFinishChange((val) => {
     // 防抖版本...
   })
+  const params = {
+    color: '#000000',
+    fn: () => {
+      gsap.to(mesh.position, { x: 5, duration: 2, yoyo: true, repeat: -1})
+    }
+  }
+  gui.add(mesh.position, "y")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动y')
+  .onChange((val) => {
+    console.log('y修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
+  gui.add(mesh.position, "z")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动z')
+  .onChange((val) => {
+    console.log('z修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
+gui.addColor(params, "color").onChange((val) => {
+  console.log('颜色修改>>>', val)
+  mesh.material.color.set(val)
+})
+gui.add(mesh, "visible").name('show')
+// add fn
+gui.add(params, "fn").name("run") 
+// set folder
+const folder = gui.addFolder("设置立方体")
+folder.add(mesh.material, "wireframe")
+
+
+
 scene.add(mesh)
 // this.moveGeo()
 
@@ -90,18 +133,18 @@ const clock = new THREE.Clock()
 const gridHelper = new THREE.GridHelper(50,50)
 scene.add(gridHelper)
 
-// 导入模型
-const loader = new GLTFLoader()
-const dracoLoader = new DRACOLoader()
-dracoLoader.preload()
-dracoLoader.setDecoderPath("./draco/")
-loader.setDRACOLoader(dracoLoader)
-// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
-  loader.load("air.glb", function(gltf) {
-  console.log('success!!!')
-  const air = gltf.scene
-  scene.add(air)
-})
+// 导入模型 //fail
+// const loader = new GLTFLoader()
+// const dracoLoader = new DRACOLoader()
+// dracoLoader.preload()
+// dracoLoader.setDecoderPath("./draco/")
+// loader.setDRACOLoader(dracoLoader)
+// // loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+//   loader.load("air.glb", function(gltf) {
+//   console.log('success!!!')
+//   const air = gltf.scene
+//   scene.add(air)
+// })
 
 
 // 设置动画
@@ -128,20 +171,20 @@ loader.setDRACOLoader(dracoLoader)
 //    yoyo: true,
 //    delay: 2
 //   })
-  const ani1 = gsap.to(mesh.position, {
-   duration: 1, 
-   ease: "power1.inOut",
-   x: 10,
-   repeat: -1,
-   yoyo: true,
-  //  delay: 2
-  })
+  // const ani1 = gsap.to(mesh.position, {
+  //  duration: 1, 
+  //  ease: "power1.inOut",
+  //  x: 10,
+  //  repeat: -1,
+  //  yoyo: true,
+  // //  delay: 2
+  // })
   window.addEventListener("dblclick", () => {
-    if (ani1.isActive()) {
-      ani1.pause()
-    } else {
-      ani1.resume()
-    }
+    // if (ani1.isActive()) {
+    //   ani1.pause()
+    // } else {
+    //   ani1.resume()
+    // }
   })
   window.addEventListener("resize", () => {
     camera.aspect = window.innerWidth / window.innerHeight
