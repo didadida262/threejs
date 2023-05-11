@@ -1,4 +1,4 @@
-// 模板文件
+// 打造酷炫三角形
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
@@ -9,6 +9,7 @@ import gsap from 'gsap'
 // 用户界面
 import * as dat from 'dat.gui'
 
+console.log('THREE>>',THREE)
 const gui = new dat.GUI()
 const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
@@ -37,6 +38,9 @@ renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
 renderer.setClearColor('black')
 
+
+// const container = document.getElementById('#app')
+// console.log('container>>>', container)
 document.body.appendChild(renderer.domElement) // body元素中插入canvas对象
 
 
@@ -49,26 +53,6 @@ const clock = new THREE.Clock()
 // 网格平面
 const gridHelper = new THREE.GridHelper(50,50)
 // scene.add(gridHelper)
-
-
-
-
-
-// 纹理
-const texttureLoader = new THREE.TextureLoader()
-// const pi = texttureLoader.load('./OutdoorHDRI078_1K-HDR.exr')
-const pi = texttureLoader.load('./door.jpg')
-console.log('pi>>>',pi)
-
-// 物体
-const geometry = new THREE.SphereGeometry( 1); 
-const mesh = new THREE.MeshBasicMaterial({
-  color: 'green',
-  map: pi
-})
-const cube = new THREE.Mesh(geometry, mesh)
-scene.add(cube)
-cube.position.x = 1
 
 function animated() {
   // const time = clock.getElapsedTime()

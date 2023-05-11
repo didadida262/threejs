@@ -48,27 +48,7 @@ const clock = new THREE.Clock()
 
 // 网格平面
 const gridHelper = new THREE.GridHelper(50,50)
-// scene.add(gridHelper)
-
-
-
-
-
-// 纹理
-const texttureLoader = new THREE.TextureLoader()
-// const pi = texttureLoader.load('./OutdoorHDRI078_1K-HDR.exr')
-const pi = texttureLoader.load('./door.jpg')
-console.log('pi>>>',pi)
-
-// 物体
-const geometry = new THREE.SphereGeometry( 1); 
-const mesh = new THREE.MeshBasicMaterial({
-  color: 'green',
-  map: pi
-})
-const cube = new THREE.Mesh(geometry, mesh)
-scene.add(cube)
-cube.position.x = 1
+scene.add(gridHelper)
 
 function animated() {
   // const time = clock.getElapsedTime()

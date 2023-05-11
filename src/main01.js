@@ -1,4 +1,4 @@
-// 打造酷炫三角形
+// 导入模型
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
@@ -18,38 +18,92 @@ const scene = new THREE.Scene()
 
 // 创建几何体
 
-for (let i = 0; i < 50; i++) {
-  const geometry = new THREE.BufferGeometry()
-  const positionArray = new Float32Array(9)
-  for (let j = 0; j < 9; j++) {
-    positionArray[j] = Math.random() * 10 - 5
-  }
-  geometry.setAttribute("position", new THREE.BufferAttribute(positionArray, 3))
-  const material = new THREE.MeshBasicMaterial({
-    // metalness: 0.7,
-    // roughness: 0.2,
-    color: new THREE.Color(Math.random() ,Math.random(),Math.random()),
-    transparent: true,
-    opacity: 0.5
-    // color: new THREE.Color('green')
-  })
-  const mesh = new THREE.Mesh(geometry, material)
-  console.log('mesh>>', mesh)
-  scene.add(mesh)
-}
 
-
+const geometry = new THREE.BoxGeometry(1, 1, 1)
+const material = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
 // material.metalness = 1
 // material.roughness = 1
+material.metalness = 0.7
+material.roughness = 0.2
+material.color = new THREE.Color('green')
 // mesh
+const mesh = new THREE.Mesh(geometry, material)
+console.log('mesh>>', mesh)
+// datGUI
+gui.add(mesh.position, "x")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动x')
+  .onChange((val) => {
+    console.log('x修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
+  const params = {
+    color: '#000000',
+    fn: () => {
+      gsap.to(mesh.position, { x: 5, duration: 2, yoyo: true, repeat: -1})
+    }
+  }
+  gui.add(mesh.position, "y")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动y')
+  .onChange((val) => {
+    console.log('y修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
+  gui.add(mesh.position, "z")
+  .min(0)
+  .max(10)
+  .step(0.01)
+  .name('移动z')
+  .onChange((val) => {
+    console.log('z修改>>>', val)
+  })
+  .onFinishChange((val) => {
+    // 防抖版本...
+  })
+gui.addColor(params, "color").onChange((val) => {
+  console.log('颜色修改>>>', val)
+  mesh.material.color.set(val)
+})
+gui.add(mesh, "visible").name('show')
+// add fn
+gui.add(params, "fn").name("run") 
+// set folder
+const folder = gui.addFolder("设置立方体")
+folder.add(mesh.material, "wireframe")
 
 
 
+scene.add(mesh)
+// this.moveGeo()
 
+
+// this.setPoint()
 const point = new THREE.PointLight(0xffffff, 2)
 point.position.set(0, 50, 50)
 scene.add(point)
+// 测试点
+// const point2 = new THREE.PointLight(0xffffff, 2)
+// point2.position.set(100, 0, 0)
+// this.scene.add(point2)
+
+
+
+// // // 环境光
+// let ambient = new THREE.AmbientLight(0x444444);
+// scene.add(ambient);
+
+
+// this.setCamera()
 const k = containerWidth / containerHeight // 窗口宽高比
 const s = 5 // 三维场景显示范围控制系数，系数越大，显示的范围越大
 const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
@@ -65,7 +119,7 @@ scene.add(axesHelper)
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
-renderer.setClearColor('black')
+renderer.setClearColor('gray',0.5)
 
 
 // const container = document.getElementById('#app')
@@ -81,20 +135,20 @@ const clock = new THREE.Clock()
 
 // grid
 const gridHelper = new THREE.GridHelper(50,50)
-// scene.add(gridHelper)
+scene.add(gridHelper)
 
 // 导入模型 //fail
-// const loader = new GLTFLoader()
-// const dracoLoader = new DRACOLoader()
-// dracoLoader.preload()
-// dracoLoader.setDecoderPath("./draco/")
-// loader.setDRACOLoader(dracoLoader)
-// // loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
-//   loader.load("air.glb", function(gltf) {
-//   console.log('success!!!')
-//   const air = gltf.scene
-//   scene.add(air)
-// })
+const loader = new GLTFLoader()
+const dracoLoader = new DRACOLoader()
+dracoLoader.preload()
+dracoLoader.setDecoderPath("./draco/")
+loader.setDRACOLoader(dracoLoader)
+// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+  loader.load("air.glb", function(gltf) {
+  console.log('success!!!')
+  const air = gltf.scene
+  scene.add(air)
+})
 
 
 // 设置动画
