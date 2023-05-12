@@ -1,9 +1,13 @@
-// 模板文件
+/*
+ * @Author: Hhvcg
+ * @Date: 2023-05-12 09:29:37
+ * @LastEditors: Hhvcg
+ * description: threejs模板文件
+ */
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
-// dracoLoader.setDecoderPath("/three/examples/jsm/loaders/draco/gltf/")
 // 动画库
 import gsap from 'gsap'
 // 用户界面
@@ -36,14 +40,14 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
 renderer.setClearColor('black')
-
 document.body.appendChild(renderer.domElement) // body元素中插入canvas对象
 
-
+// 轨道
 const orbit = new OrbitControls(camera, renderer.domElement)
 // 设置控制器阻尼
 orbit.enableDamping = true
 
+// 时钟
 const clock = new THREE.Clock()
 
 // 网格平面
