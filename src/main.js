@@ -21,20 +21,21 @@ const scene = new THREE.Scene()
 
 
 // 灯光配置
-const pointLight = new THREE.PointLight(0xffffff,1)
-pointLight.position.set(0, 0, 20)
+const pointLight = new THREE.PointLight(0xffffff,1, 100)
+pointLight.position.set(0, 5, 0)
 scene.add(pointLight)
 const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize, 'white' );
 scene.add( pointLightHelper );
 
 // 相机
-const k = containerWidth / containerHeight // 窗口宽高比
-const s = 5 // 三维场景显示范围控制系数，系数越大，显示的范围越大
-const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
-camera.position.set(200, 300, 200) // 设置相机位置
-camera.lookAt(scene.position) // 设置相机方向(指向的场景对象)
-
+// const k = containerWidth / containerHeight // 窗口宽高比
+// const s = 5 // 三维场景显示范围控制系数，系数越大，显示的范围越大
+// const camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000)
+// camera.position.set(200, 300, 200) // 设置相机位置
+// camera.lookAt(scene.position) // 设置相机方向(指向的场景对象)
+const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+camera.position.z = 5;
 
 // 坐标系
 const axesHelper = new THREE.AxesHelper(500)
@@ -67,16 +68,16 @@ const texttureLoader = new THREE.TextureLoader()
 const pi = texttureLoader.load('./door.jpg')
 
 // 物体
-const geometry = new THREE.SphereGeometry( 1); 
+const geometry = new THREE.SphereGeometry(1, 32, 32); 
 // geometry.computeVertexNormals()
-const mesh = new THREE.MeshBasicMaterial({
+const mesh = new THREE.MeshPhongMaterial({
   // map: pi
   color: 'black',
 })
 // const mesh = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
-mesh.metalness = 0.7
-mesh.roughness = 0.2
+// mesh.metalness = 0.7
+// mesh.roughness = 0.2
 const cube = new THREE.Mesh(geometry, mesh)
 scene.add(cube)
 console.log('cube>>>',cube)
@@ -155,6 +156,8 @@ function animated() {
     //     // mesh.scale.x = 1
     // }
     // mesh.rotation.z += 0.01
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
     orbit.update()
     renderer.render(scene, camera)
     requestAnimationFrame(animated)
