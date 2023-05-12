@@ -13,7 +13,62 @@ import gsap from 'gsap'
 // 用户界面
 import * as dat from 'dat.gui'
 
-const gui = new dat.GUI()
+
+
+
+// 配置gui
+// const gui = new dat.GUI()
+// // datGUI
+// gui.add(mesh.position, "x")
+//   .min(0)
+//   .max(10)
+//   .step(0.01)
+//   .name('移动x')
+//   .onChange((val) => {
+//     console.log('x修改>>>', val)
+//   })
+//   .onFinishChange((val) => {
+//     // 防抖版本...
+//   })
+//   const params = {
+//     color: '#000000',
+//     fn: () => {
+//       gsap.to(mesh.position, { x: 5, duration: 2, yoyo: true, repeat: -1})
+//     }
+//   }
+//   gui.add(mesh.position, "y")
+//   .min(0)
+//   .max(10)
+//   .step(0.01)
+//   .name('移动y')
+//   .onChange((val) => {
+//     console.log('y修改>>>', val)
+//   })
+//   .onFinishChange((val) => {
+//     // 防抖版本...
+//   })
+//   gui.add(mesh.position, "z")
+//   .min(0)
+//   .max(10)
+//   .step(0.01)
+//   .name('移动z')
+//   .onChange((val) => {
+//     console.log('z修改>>>', val)
+//   })
+//   .onFinishChange((val) => {
+//     // 防抖版本...
+//   })
+// gui.addColor(params, "color").onChange((val) => {
+//   console.log('颜色修改>>>', val)
+//   mesh.material.color.set(val)
+// })
+// gui.add(mesh, "visible").name('show')
+// // add fn
+// gui.add(params, "fn").name("run") 
+// // set folder
+// const folder = gui.addFolder("设置立方体")
+// folder.add(mesh.material, "wireframe")
+
 const containerWidth = window.innerWidth // 窗口宽度
 const containerHeight = window.innerHeight // 窗口高度
 const scene = new THREE.Scene()
