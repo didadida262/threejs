@@ -68,12 +68,16 @@ const texttureLoader = new THREE.TextureLoader()
 const pi = texttureLoader.load('./door.jpg')
 
 // 物体
-const geometry = new THREE.SphereGeometry(1, 32, 32); 
+// const geometry = new THREE.SphereGeometry(1, 32, 32); 
+const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 );
+
 // geometry.computeVertexNormals()
 const mesh = new THREE.MeshPhongMaterial({
   // map: pi
-  color: 'black',
+  color: 0xffffff,
 })
+// var material = new THREE.MeshPhongMaterial({color: 0xffffff});
+
 // const mesh = new THREE.MeshStandardMaterial()
 // const material  = new Three.MeshBasicMaterial({})
 // mesh.metalness = 0.7
@@ -156,8 +160,8 @@ function animated() {
     //     // mesh.scale.x = 1
     // }
     // mesh.rotation.z += 0.01
-    // cube.rotation.x += 0.01;
-    // cube.rotation.y += 0.01;
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
     orbit.update()
     renderer.render(scene, camera)
     requestAnimationFrame(animated)
