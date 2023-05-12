@@ -29,13 +29,13 @@ camera.lookAt(scene.position) // 设置相机方向(指向的场景对象)
 // 坐标系
 const axesHelper = new THREE.AxesHelper(500)
 axesHelper.setColors('red', 'green', 'orange')
-scene.add(axesHelper)
+// scene.add(axesHelper)
 
 // 渲染器
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(containerWidth, containerHeight)// 设置渲染区域尺寸
 renderer.render(scene, camera)
-renderer.setClearColor('gray')
+renderer.setClearColor('black')
 
 document.body.appendChild(renderer.domElement) // body元素中插入canvas对象
 
@@ -72,18 +72,18 @@ console.log('cube>>>',cube)
 cube.position.x = 1
 
 
-// 导入模型 //fail
-const loader = new GLTFLoader()
-const dracoLoader = new DRACOLoader()
-dracoLoader.preload()
-dracoLoader.setDecoderPath("./draco/")
-loader.setDRACOLoader(dracoLoader)
-// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
-  loader.load("Pistol_Model.glb", function(gltf) {
-  console.log('success!!!---gltf', gltf)
-  const air = gltf.scene
-  scene.add(air)
-})
+// 导入模型
+// const loader = new GLTFLoader()
+// const dracoLoader = new DRACOLoader()
+// dracoLoader.preload()
+// dracoLoader.setDecoderPath("./draco/")
+// loader.setDRACOLoader(dracoLoader)
+// // loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+//   loader.load("Pistol_Model.glb", function(gltf) {
+//   console.log('success!!!---gltf', gltf)
+//   const air = gltf.scene
+//   scene.add(air)
+// })
 
 function animated() {
   // const time = clock.getElapsedTime()
