@@ -2,7 +2,7 @@
  * @Author: Hhvcg
  * @Date: 2023-05-11 17:50:16
  * @LastEditors: Hhvcg
- * description: 纹理显示算法
+ * description: 测试灯光
  */
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -56,7 +56,6 @@ document.body.appendChild(renderer.domElement) // body元素中插入canvas对�
 const orbit = new OrbitControls(camera, renderer.domElement)
 // 设置控制器阻尼
 orbit.enableDamping = true
-orbit.autoRotate = true
 
 const clock = new THREE.Clock()
 
@@ -68,8 +67,7 @@ const gridHelper = new THREE.GridHelper(50,50)
 // 纹理
 const texttureLoader = new THREE.TextureLoader()
 // const pi = texttureLoader.load('./OutdoorHDRI078_1K-HDR.exr')
-// const pi = texttureLoader.load('./wuqi.jpg')
-const pi = texttureLoader.load('./earth.jpg')
+const pi = texttureLoader.load('./door.jpg')
 
 // 物体
 const geometry = new THREE.SphereGeometry(1, 32, 32); 
@@ -77,10 +75,8 @@ const geometry = new THREE.SphereGeometry(1, 32, 32);
 
 // geometry.computeVertexNormals()
 const mesh = new THREE.MeshPhongMaterial({
-  map: pi,
-  color: 0xffffff,
-  transparent:true,
-  side: THREE.DoubleSide
+  map: pi
+  // color: 0xffffff,
 })
 // var material = new THREE.MeshPhongMaterial({color: 0xffffff});
 
