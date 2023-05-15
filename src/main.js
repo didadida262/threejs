@@ -22,7 +22,7 @@ const scene = new THREE.Scene()
 
 // 灯光配置
 const pointLight = new THREE.PointLight(0xffffff,1, 100)
-pointLight.position.set(0, 5, 0)
+pointLight.position.set(5, 0, 0)
 scene.add(pointLight)
 const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize, 'white' );
@@ -83,9 +83,21 @@ const mesh = new THREE.MeshPhongMaterial({
 // mesh.metalness = 0.7
 // mesh.roughness = 0.2
 const cube = new THREE.Mesh(geometry, mesh)
-scene.add(cube)
+// scene.add(cube)
 console.log('cube>>>',cube)
 
+// 导入模型 //fail
+const loader = new GLTFLoader()
+const dracoLoader = new DRACOLoader()
+dracoLoader.preload()
+dracoLoader.setDecoderPath("./draco/")
+loader.setDRACOLoader(dracoLoader)
+// loader.load("https://threejs.org/examples/models/gltf/LittlestTokyo.glb", function(gltf) {
+  loader.load("Pistol_Model.glb", function(gltf) {
+  console.log('success!!!')
+  const gun = gltf.scene
+  scene.add(gun)
+})
 
 // scene.add(point)
 // // 环境光 ---无效
